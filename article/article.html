@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TYT的文章 - 优化版Windows Phone风格</title>
+<link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600&family=Cascadia+Code&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../assets/style/style.css">
+</head>
+<body>
+<div id="content" class="tile-effect">
+<h1>这是me的Markdown文章页面实例</h1>
 
+<h2>功能演示</h2>
+<ul>
+<li><strong>这是加粗文本</strong></li>
+<li><em>这是斜体文本</em></li>
+<li><a href="https://Tank37135.github.io" target="_blank">友情链接</a ></li>
+</ul>
+
+<div class="code-block-wrapper">
+<pre><code class="language-javascript">// 代码块示例
+function greet(name) {
+console.log(`Hello ${name}!`);
+
+// 这是一个长的代码示例，用于测试水平滚动
+const longArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+const result = longArray.map(x => x * 2).filter(x => x > 10).reduce((sum, x) => sum + x, 0);
+return result;
+}</code></pre>
+<button class="copy-btn">复制</button>
+</div>
+
+<h2>这是markdown表格</h2>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>描述</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>响应式设计</td>
+<td>适配各种屏幕尺寸</td>
+<td>✅ 完成</td>
+</tr>
+<tr>
+<td>移动优化</td>
+<td>针对小屏幕优化</td>
+<td>✅ 完成</td>
+</tr>
+<tr>
+<td>代码高亮</td>
+<td>代码块的可读性</td>
+<td>✅ 完成</td>
+</tr>
+<tr>
+<td>夜间模式</td>
+<td>暗色主题支持</td>
+<td> 待实现</td>
+</tr>
+</tbody>
+</table>
+
+<h2>图片示例</h2>
+<img src="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Homepage_Hero_Realms_1080x1080_01.jpg" alt="示例图片" title="响应式图片示例">
+
+<blockquote>
+这是一个优化后的Windows Phone风格Markdown页面，在电脑屏幕上显示更加美观，同时保留了Metro UI的核心设计语言。
+</blockquote>
+</div>
+<script type="text/javascript" src="../assets/script/script.js"> </script>
+ 
+</body>
+</html>
