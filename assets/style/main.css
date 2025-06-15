@@ -1,1 +1,351 @@
+        body{
+                       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #2b2d42;
+            background: linear-gradient(to bottom right, #1a71d5, #c469f4);
+        
+            min-height: 100vh; /* 确保body至少和视口一样高 */
+            background-size: cover; /* 覆盖整个区域 */
+            padding-top: 90px;
+        }
 
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: #1a1a1a;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 2px;
+            overflow: hidden;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-header {
+            background-color: #0066cc;
+            padding: 2px 10px;
+            font-size: 18px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        .modal-body {
+            color: white;
+            padding: 10px;
+            line-height: 1.5;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            padding: 5px 10px;
+            background-color: #2a2a2a;
+        }
+        
+        .modal-button {
+            padding: 8px 16px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .modal-button.primary {
+            background-color: #0066cc;
+            color: white;
+        }
+        
+        .modal-button.secondary {
+            background-color: #4a4a4a;
+            color: white;
+        }
+        
+        .modal-button:hover {
+            opacity: 0.9;
+            transform: scale(0.98);
+        }
+    
+        .clock {
+            width: 180px;
+            height: 180px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+        }
+
+        .clock:hover, .clock:active {
+            border-color: #00ffcc;
+            box-shadow: 0 0 25px #00ffcc, 0 0 50px #00ffcc, 0 0 75px #00ffcc;
+            transform: scale(1.05);
+        }
+
+        .center {
+            width: 8px; /* 调整为更小的圆点 */
+            height: 8px; /* 调整为更小的圆点 */
+            background-color: #00ffcc;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 4;
+            box-shadow: 0 0 10px #00ffcc;
+        }
+
+        .hour-hand {
+            width: 5px; /* 调整为更小的时针 */
+            height: 40px; /* 调整为更短的时针 */
+            background-color: #00ffcc;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: 50% 100%;
+            transform: translate(-50%, -100%) rotate(0deg);
+            z-index: 1;
+            box-shadow: 0 0 5px #00ffcc;
+        }
+
+        .minute-hand {
+            width: 3px; /* 调整为更小的分针 */
+            height: 60px; /* 调整为更短的分针 */
+            background-color: #00ffcc;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: 50% 100%;
+            transform: translate(-50%, -100%) rotate(0deg);
+            z-index: 2;
+            box-shadow: 0 0 5px #00ffcc;
+        }
+
+        .second-hand {
+            width: 2px;
+            height: 80px; /* 调整为更短的秒针 */
+            background-color: #e74c3c;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: 50% 100%;
+            transform: translate(-50%, -100%) rotate(0deg);
+            z-index: 3;
+            box-shadow: 0 0 5px #e74c3c;
+        }
+
+        .mark {
+            width: 2px;
+            height: 8px; /* 调整为更短的标记 */
+            background-color: #00ffcc;
+            position: absolute;
+            top: 72%;
+            left: 50%;
+            transform-origin: 50% 90px;
+            box-shadow: 0 0 3px #00ffcc;
+        }
+
+        .mark-1 { transform: translate(-50%, -130px) rotate(30deg); }
+        .mark-2 { transform: translate(-50%, -130px) rotate(60deg); }
+        .mark-3 { transform: translate(-50%, -130px) rotate(90deg); }
+        .mark-4 { transform: translate(-50%, -130px) rotate(120deg); }
+        .mark-5 { transform: translate(-50%, -130px) rotate(150deg); }
+        .mark-6 { transform: translate(-50%, -130px) rotate(180deg); }
+        .mark-7 { transform: translate(-50%, -130px) rotate(210deg); }
+        .mark-8 { transform: translate(-50%, -130px) rotate(240deg); }
+        .mark-9 { transform: translate(-50%, -130px) rotate(270deg); }
+        .mark-10 { transform: translate(-50%, -130px) rotate(300deg); }
+        .mark-11 { transform: translate(-50%, -130px) rotate(330deg); }
+        .mark-12 { transform: translate(-50%, -130px) rotate(0deg); }
+    
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(to bottom right, blue, pink);
+            color: white;
+            margin: 0;
+            padding: 10px;
+        }
+        
+        .tiles-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 8px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .tile {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            padding: 8px;
+            box-sizing: border-box;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: white;
+            aspect-ratio: 1;
+        }
+        
+        .tile:hover {
+            opacity: 0.9;
+            transform: scale(0.98);
+        }
+        
+        .tile:active {
+            transform: scale(0.95);
+        }
+        
+        .tile i {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .tile-small {
+            grid-column: span 1;
+        }
+        
+        .tile-medium {
+            grid-column: span 2;
+            aspect-ratio: 2/1;
+        }
+        
+        .tile-large {
+            grid-column: span 2;
+            grid-row: span 2;
+            aspect-ratio: 1/1;
+        }
+        
+        /* 不同磁贴的颜色 */
+        .tile-1 { background-color: #1ba1e2; }
+        .tile-2 { background-color: #e51400; }
+        .tile-3 { background-color: #fa6800; }
+        .tile-4 { background-color: #60a917; }
+        .tile-5 { background-color: #aa00ff; }
+        .tile-6 { background-color: #d80073; }
+        .tile-7 { background-color: #00aba9; }
+        .tile-8 { background-color: #647687; }
+        .tile-9 { background-color: #76608a; }
+        .tile-10 { background-color: #a0522d; }
+        .tile-11 { background-color: #6d8764; }
+        .tile-12 { background-color: #1ba1e2; }
+        .tile-13 { background-color: #e51400; }
+        .tile-14 { background-color: #fa6800; }
+        .tile-15 { background-color: #60a917; }
+        .tile-16 { background-color: #aa00ff; }
+
+        @media (max-width: 600px) {
+            .tiles-container {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 6px;
+            }
+            .tile {
+                font-size: 12px;
+                padding: 6px;
+            }
+            .tile i {
+                font-size: 20px;
+                margin-bottom: 6px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .tiles-container {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+        }
+
+
+
+ a {
+      color: #3498db;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      position: relative;
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 悬停效果 */
+    a:hover {
+      color: white;
+      background-color: #2980b9;
+      transform: scale(1.1);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 点击效果 */
+    a:active {
+      transform: scale(0.98);
+    }
+
+    /* 添加动画效果 */
+    a::before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background-color: #2980b9;
+      bottom: 0;
+      left: 50%;
+      transition: width 0.3s ease, left 0.3s ease;
+    }
+
+    a:hover::before {
+      width: 100%;
+      left: 0;
+    }
+
+    /* 为了美观，可以设置链接内容的字体变化 */
+    a:hover {
+      font-family: 'Courier New', Courier, monospace;
+    }

@@ -1,0 +1,332 @@
+:root {
+--primary-color: #0078D7; /* Windows Phone 蓝色 */
+--accent-color: #FFB900; /* Windows Phone 强调色 */
+--dark-color: #1A1A1A;
+--light-color: #F2F2F2;
+--text-color: #333333;
+--card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+--card-radius: 8px;
+}
+
+body {
+font-family: 'Segoe UI', 'Segoe WP', sans-serif;
+max-width: 900px;
+margin: 40px auto;
+padding: 0 40px;
+line-height: 1.8;
+color: var(--text-color);
+background: linear-gradient(to bottom right, #1a71d5, #c469f4);
+-webkit-font-smoothing: antialiased;
+}
+
+/* 主内容卡片 */
+#content {
+background: white;
+padding: 40px;
+border-radius: var(--card-radius);
+box-shadow: var(--card-shadow);
+}
+
+/* 优化后的标题样式 */
+h1 {
+font-size: 2.8em;
+font-weight: 300;
+margin: 0.5em 0 0.8em;
+color: var(--primary-color);
+padding-bottom: 0.3em;
+border-bottom: 2px solid var(--primary-color);
+letter-spacing: -0.5px;
+}
+
+h2 {
+font-size: 2em;
+font-weight: 300;
+margin: 1.5em 0 0.8em;
+color: var(--primary-color);
+position: relative;
+padding-left: 20px;
+}
+
+h2:before {
+content: "";
+position: absolute;
+left: 0;
+top: 0.35em;
+height: 0.8em;
+width: 6px;
+background: var(--accent-color);
+}
+
+/* 段落样式 */
+p {
+margin: 1.5em 0;
+font-size: 1.1em;
+line-height: 1.8;
+color: #444;
+}
+
+/* 链接样式 */
+a {
+color: var(--primary-color);
+text-decoration: none;
+border-bottom: 1px dashed var(--primary-color);
+transition: all 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+padding-bottom: 1px;
+}
+
+a:hover {
+color: var(--accent-color);
+border-bottom-color: var(--accent-color);
+}
+
+/* 列表样式 - 优化版 */
+ul {
+list-style-type: none;
+padding-left: 1.5em;
+margin: 1.5em 0;
+}
+
+ul li {
+position: relative;
+padding-left: 1.8em;
+margin: 1em 0;
+font-size: 1.1em;
+}
+
+ul li:before {
+content: "";
+position: absolute;
+left: 0;
+top: 0.6em;
+width: 8px;
+height: 8px;
+background: var(--primary-color);
+border-radius: 50%;
+transform: translateY(-50%);
+}
+
+/* 代码样式 */
+code {
+font-family: 'Cascadia Code', 'Consolas', monospace;
+background-color: rgba(0, 120, 215, 0.08);
+padding: 0.2em 0.4em;
+border-radius: 4px;
+color: #0066CC;
+font-size: 0.9em;
+}
+
+pre {
+background-color: var(--dark-color);
+padding: 20px;
+border-radius: var(--card-radius);
+overflow-x: auto;
+margin: 2em 0;
+line-height: 1.5;
+position: relative;
+box-shadow: var(--card-shadow);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+pre:hover {
+transform: translateY(-2px);
+box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+pre code {
+background: transparent;
+color: #f0f0f0;
+padding: 0;
+font-size: 0.9em;
+line-height: 1.6;
+}
+
+/* 表格样式 */
+table {
+width: 100%;
+border-collapse: collapse;
+margin: 2em 0;
+font-size: 1em;
+box-shadow: var(--card-shadow);
+border-radius: var(--card-radius);
+overflow: hidden;
+}
+
+table th {
+background-color: var(--primary-color);
+color: white;
+text-align: left;
+font-weight: 400;
+padding: 15px;
+font-size: 1.05em;
+}
+
+table td {
+padding: 15px;
+border-bottom: 1px solid #E6E6E6;
+background: white;
+}
+
+table tr:last-child td {
+border-bottom: none;
+}
+
+table tr:nth-child(even) td {
+background-color: rgba(0, 120, 215, 0.05);
+}
+
+/* 引用样式 */
+blockquote {
+border-left: 4px solid var(--primary-color);
+padding: 20px;
+margin: 2em 0;
+color: #666;
+font-style: italic;
+font-size: 1.1em;
+background: rgba(0, 120, 215, 0.05);
+border-radius: 0 var(--card-radius) var(--card-radius) 0;
+}
+
+/* 图片样式 */
+img {
+max-width: 100%;
+height: auto;
+display: block;
+margin: 2em auto;
+box-shadow: var(--card-shadow);
+border-radius: var(--card-radius);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+img:hover {
+transform: translateY(-3px);
+box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 优化后的复制按钮 */
+.code-block-wrapper {
+position: relative;
+}
+
+.copy-btn {
+position: absolute;
+top: 12px;
+right: 12px;
+padding: 6px 12px;
+background: var(--accent-color);
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-family: 'Segoe UI', sans-serif;
+font-weight: 600;
+color: var(--dark-color);
+opacity: 0.9;
+transition: all 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+font-size: 0.85em;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.copy-btn:hover {
+background: #FF8C00;
+color: white;
+transform: translateY(-1px);
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.copy-btn.copied {
+background: #4CAF50;
+color: white;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+body {
+padding: 20px;
+margin: 20px auto;
+}
+
+#content {
+padding: 30px;
+}
+
+#content h1 {
+font-size: 2.2em;
+}
+
+#content h2 {
+font-size: 1.6em;
+}
+}
+
+@media (max-width: 480px) {
+body {
+padding: 10px;
+margin: 10px auto;
+}
+
+#content {
+padding: 20px;
+}
+
+#content h1 {
+font-size: 1.8em;
+}
+
+.copy-btn {
+opacity: 1;
+padding: 5px 10px;
+font-size: 0.8em;
+}
+}
+
+/* 优化后的动画 */
+@keyframes fadeInUp {
+from {
+opacity: 0;
+transform: translateY(30px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+#content > * {
+animation: fadeInUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.1) both;
+}
+
+/* 延迟动画 */
+#content > *:nth-child(1) { animation-delay: 0.1s; }
+#content > *:nth-child(2) { animation-delay: 0.2s; }
+#content > *:nth-child(3) { animation-delay: 0.3s; }
+#content > *:nth-child(4) { animation-delay: 0.4s; }
+#content > *:nth-child(5) { animation-delay: 0.5s; }
+#content > *:nth-child(n+6) { animation-delay: 0.6s; }
+
+/* 添加一些装饰元素 */
+body:before {
+content: "";
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 6px;
+background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-color) 100%);
+z-index: 1000;
+}
+
+/* 添加Windows Phone风格的磁贴效果 */
+.tile-effect {
+position: relative;
+overflow: hidden;
+}
+
+.tile-effect:after {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+pointer-events: none;
+}
