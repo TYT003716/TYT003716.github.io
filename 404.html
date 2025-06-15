@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 - 页面未找到</title>
+<style>
+body {
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    padding: 50px;
+    background-color: #121212;
+    color: #8b8b8b;
+    cursor: default;
+    overflow: hidden;
+    height: 100vh;
+    background-image:
+    radial-gradient(circle at 10% 20%, rgba(255,0,0,0.05) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(0,0,255,0.05) 0%, transparent 20%);
+}
+h1 {
+    font-size: 100px;
+    color: #3498db;
+    margin-bottom: 10px;
+    position: relative;
+}
+p {
+    font-size: 20px;
+    color: red;
+    position: relative;
+}
+a {
+    text-decoration: none;
+    color: #3498db;
+    font-size: 18px;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.eyes-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 20px 0 40px;
+}
+
+.eye {
+    width: 60px;
+    height: 60px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    position: relative;
+    box-shadow:
+    inset 0 0 15px #000,
+    0 0 10px rgba(90, 0, 0, 0.5);
+    border: 1px solid #300000;
+}
+
+.pupil {
+    width: 25px;
+    height: 25px;
+    background: #5a0000;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease-out;
+    box-shadow:
+    0 0 10px #300000,
+    inset 0 0 5px #000;
+}
+
+@keyframes text-glitch {
+    0% { transform: translate(0); text-shadow: 0 0 3px #300000; }
+    10% { transform: translate(-5px, -2px); text-shadow: -3px -2px 3px #001a00; }
+    20% { transform: translate(5px, 2px); text-shadow: 3px 2px 3px #00001a; }
+    30% { transform: translate(-3px, 1px); text-shadow: -2px 1px 3px #1a1a00; }
+    40% { transform: translate(3px, -1px); text-shadow: 2px -1px 3px #001a1a; }
+    50% { transform: translate(-2px, 0); text-shadow: -2px 0 3px #300000; }
+    60% { transform: translate(2px, 0); text-shadow: 2px 0 3px #001a00; }
+    70% { transform: translate(-1px, 0); text-shadow: -1px 0 3px #00001a; }
+    80% { transform: translate(1px, 0); text-shadow: 1px 0 3px #1a1a00; }
+    90% { transform: translate(-1px, 0); text-shadow: -1px 0 3px #001a1a; }
+    100% { transform: translate(0); text-shadow: 0 0 3px #300000; }
+}
+.glitch-active {
+    animation: text-glitch 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+</style>
+</head>
+<body>
+<h1>404</h1>
+
+<div class="eyes-container">
+    <div class="eye">
+        <div class="pupil" id="left-pupil"></div>
+    </div>
+    <div class="eye">
+        <div class="pupil" id="right-pupil"></div>
+    </div>
+</div>
+
+<p id="message">你迷路了...</p>
+<p><a id="backButton" href=" ">返回首页</a></p>
+
+<script>
+const messages = ["你迷路了...", "你不该来这里...", "你无法逃脱...", "你将成为一部分...", "找不到出路...", "你别想出去", "我会盯着你"];
+const messageElement = document.getElementById("message");
+let messageIndex = 0;
+
+const leftPupil = document.getElementById('left-pupil');
+const rightPupil = document.getElementById('right-pupil');
+const eyes = document.querySelectorAll('.eye');
+const backButton = document.getElementById('backButton');
+
+if (document.referrer && document.referrer !== "") {
+    backButton.textContent = "返回上一页";
+    backButton.href = document.referrer;
+} else {
+    backButton.href = "/";
+}
+
+function moveEyes(e) {
+    eyes.forEach(eye => {
+        const eyeRect = eye.getBoundingClientRect();
+        const eyeX = eyeRect.left + eyeRect.width / 2;
+        const eyeY = eyeRect.top + eyeRect.height / 2;
+
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        const angle = Math.atan2(mouseY - eyeY, mouseX - eyeX);
+
+        // 减少眼珠移动范围，制造更紧张的感觉
+        const distance = 8;
+        const pupil = eye.querySelector('.pupil');
+        const pupilX = Math.cos(angle) * distance;
+        const pupilY = Math.sin(angle) * distance;
+
+        pupil.style.transform = `translate(calc(-50% + ${pupilX}px), calc(-50% + ${pupilY}px))`;
+
+        const intensity = Math.min(1, Math.sqrt(pupilX*pupilX + pupilY*pupilY)/10);
+        pupil.style.backgroundColor = `rgb(${90 + intensity*50}, 0, 0)`;
+    });
+}
+
+document.addEventListener('mousemove', moveEyes);
+
+function addCreepyEffect() {
+    if(Math.random() > 0.7) {
+        const glitch = document.createElement('div');
+        glitch.style.position = 'fixed';
+        glitch.style.width = '100%';
+        glitch.style.height = '100%';
+        glitch.style.top = '0';
+        glitch.style.left = '0';
+        glitch.style.background = 'rgba(90, 0, 0, 0.05)';
+        glitch.style.zIndex = '9999';
+        glitch.style.pointerEvents = 'none';
+        glitch.style.animation = 'flicker 0.1s linear';
+        document.body.appendChild(glitch);
+        setTimeout(() => {
+            glitch.remove();
+        }, 100);
+    }
+}
+
+function changeMessage() {
+    messageElement.classList.add('glitch-active');
+
+    setTimeout(() => {
+        messageElement.textContent = messages[messageIndex];
+        messageIndex = (messageIndex + 1) % messages.length;
+
+        if(Math.random() > 0.5) {
+            addCreepyEffect();
+        }
+    }, 400);
+
+    setTimeout(() => {
+        messageElement.classList.remove('glitch-active');
+    }, 800);
+}
+
+changeMessage();
+
+setInterval(changeMessage, 5000);
+
+setInterval(() => {
+    if(Math.random() > 0.8) {
+        addCreepyEffect();
+    }
+}, 3000);
+</script>
+</body>
+</html>
